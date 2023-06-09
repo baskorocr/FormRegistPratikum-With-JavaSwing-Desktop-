@@ -33,8 +33,9 @@ public class loginController extends JFrame {
 
         if(result){
             dashboard abt = new dashboard();
-            abt.setVisible(true);
             view.dispose();
+            abt.setVisible(true);
+
         }
         else{
             JOptionPane.showMessageDialog(view, "Periksa Username dan Password anda");

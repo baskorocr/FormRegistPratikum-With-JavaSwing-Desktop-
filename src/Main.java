@@ -6,7 +6,8 @@ public class Main
 {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            new view.login();
+           view.login lgn = new view.login();
+
         });
 
     }

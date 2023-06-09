@@ -2,9 +2,9 @@ package controller;
 
 import view.dashboard;
 
-public class aboutController {
+public class dashboardController {
     private final dashboard view;
-    public aboutController(dashboard view){
+    public dashboardController(dashboard view){
 
         this.view = view;
     }

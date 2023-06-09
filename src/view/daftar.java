@@ -1,17 +1,21 @@
 package view;
 
+import controller.daftarController;
+
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class daftar extends JFrame {
 
     private JPanel Panel;
-    private JTextField nama;
-    private JTextField email;
-    private JTextField telp;
-    private JTextField username;
-    private JTextField password;
+   public JTextField nama;
+    public JTextField email;
+    public JTextField telp;
+    public JTextField username;
+    public JTextField password;
     private JLabel judul;
-    private JTextField konfirmasi;
+    public JTextField konfirmasi;
     private JLabel Lblemail;
     private JLabel Lbltelp;
     private JLabel Lblusername;
@@ -20,15 +24,30 @@ public class daftar extends JFrame {
     private JButton daftar;
     private JButton kembali;
 
+    private daftarController controller;
+
     public daftar(){
+        controller = new daftarController(this);
+        this.setVisible(true);
         setContentPane(Panel);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        pack();
+        setSize(300,450);
+        setResizable(false);
         setLocationRelativeTo(null);
-    }
-    public static void main(String[] args) {
-        daftar daftar = new daftar();
-        daftar.setVisible(true);
+        daftar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.proses();
+            }
+        });
+        kembali.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new login();
+                dispose();
 
+            }
+        });
     }
+
 }

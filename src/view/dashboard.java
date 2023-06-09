@@ -1,6 +1,6 @@
 package view;
 
-import controller.aboutController;
+import controller.dashboardController;
 
 
 import javax.swing.*;
@@ -18,7 +18,7 @@ public class dashboard extends JFrame {
         setContentPane(about);
         setSize(200, 150);
         setResizable(false);
-        aboutController controller = new aboutController(this);
+        dashboardController controller = new dashboardController(this);
         controller.hello();
 
     }

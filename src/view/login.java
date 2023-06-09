@@ -20,10 +20,12 @@ public class login extends JFrame{
 
 
     public login() {
+        this.setVisible(true);
+        setTitle("login");
         controller = new loginController(this);
        setContentPane(Panel);
        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        pack();
+        setSize(250,300);
         setLocationRelativeTo(null);
     login.addActionListener(new ActionListener() {
         @Override
@@ -38,16 +40,12 @@ public class login extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                view.daftar daftar = new view.daftar();
-                daftar.setVisible(true);
                 dispose();
+                daftar.setVisible(true);
+
             }
         });
     }
 
-    public static void main(String[] args) {
-        login lgn = new login();
-        lgn.setVisible(true);
 
-
-    }
 }
