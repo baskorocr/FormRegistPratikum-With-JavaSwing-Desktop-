@@ -20,12 +20,38 @@ public class loginModel {
 
         private String username;
         private String password;
+        private String nama;
+        private String email;
+        private String noHp;
 
         public String id;
 
 
+    public String getNama() {
+        return nama;
+    }
 
-        public  String getUsername(){
+    public void setNama(String nama) {
+        this.nama = nama;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getNoHp() {
+        return noHp;
+    }
+
+    public void setNoHp(String noHp) {
+        this.noHp = noHp;
+    }
+
+    public  String getUsername(){
             return username;
         }
         public void setUsername(String username){
@@ -63,7 +89,7 @@ public class loginModel {
 
         try {
             // Membuat prepared statement untuk menjalankan query
-            String query = "SELECT username,password,id FROM user WHERE username='"+getUsername()+"' AND password ='"+getPassword()+"'";
+            String query = "SELECT username,password,id,namaLengkap,email,noHp FROM user WHERE username='"+getUsername()+"' AND password ='"+getPassword()+"'";
             statement = connection.DbConnection().createStatement();
             resultSet = statement.executeQuery(query);
             if(resultSet.wasNull()){
@@ -73,11 +99,14 @@ public class loginModel {
             else{
                 String tempUser = null;
                 String tempPass = null;
-                String Id = null;
+
                 while(resultSet.next()){
                     tempUser = resultSet.getString("username");
                     tempPass = resultSet.getString("password");
-                    Id = resultSet.getString("id");
+                    setId(resultSet.getString("id"));
+                    setNama(resultSet.getString("namaLengkap"));
+                    setEmail(resultSet.getString("email"));
+                    setNoHp(resultSet.getString("noHp"));
 
                 }
                 if(tempUser == null){
@@ -87,7 +116,7 @@ public class loginModel {
                 else{
                     if(tempUser.equals(getUsername()) && tempPass.equals(getPassword())){
                         status = true;
-                        id = Id;
+
 
                     }
                     else{
@@ -131,7 +160,10 @@ public class loginModel {
                         p.add(tempPass);
                         p.add(email);
                         p.add(noHp);
+
                     }
+
+
 
                 }
             }catch (SQLException e){
@@ -140,4 +172,17 @@ public class loginModel {
             return p;
 
     }
+
+    public void editInput(){
+        DbConnection connection = new DbConnection();
+        try{
+            String query = "UPDATE user SET NamaLengkap = '"+getNama()+"', email='"+getEmail()+"', noHp='"+getNoHp()+"' WHERE id='"+getId()+"'";
+            statement = connection.DbConnection().createStatement();
+            connection.DbConnection().createStatement().executeUpdate(query);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+
 }
