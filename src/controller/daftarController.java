@@ -27,7 +27,7 @@ public class daftarController {
         String nomer = view.telp.getText();
         String konfirmasi = view.konfirmasi.getText();
 
-        System.out.println(username);
+
 
 
         if(username.isEmpty() || password.isEmpty() || nama.isEmpty() || email.isEmpty() || nomer.isEmpty() || konfirmasi.isEmpty() ){

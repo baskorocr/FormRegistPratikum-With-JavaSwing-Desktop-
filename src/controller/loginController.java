@@ -13,6 +13,7 @@ public class loginController extends JFrame {
     private loginModel model;
 
     private Boolean result;
+    private dashboard ds;
 
 
 
@@ -25,14 +26,14 @@ public class loginController extends JFrame {
     public void prosessLogin(){
         String username = view.textField1.getText();
         String password = view.textField2.getText();
-        System.out.println(password);
+
         model.setUsername(username);
         model.setPassword(password);
 
         result = model.getUser();
 
         if(result){
-            dashboard abt = new dashboard();
+            dashboard abt = new dashboard(model);
             view.dispose();
             abt.setVisible(true);
 
