@@ -33,9 +33,9 @@ public class loginController extends JFrame {
         result = model.getUser();
 
         if(result){
-            dashboard abt = new dashboard(model);
+            new dashboard(model);
             view.dispose();
-            abt.setVisible(true);
+
 
         }
         else{

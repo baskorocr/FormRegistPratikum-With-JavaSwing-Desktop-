@@ -1,69 +1,78 @@
 package view;
 
+import controller.listController;
+import model.loginModel;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 
 public class peserta extends JFrame {
+
     private JTable table;
     private JPanel panel;
     private JScrollPane SP;
     private JLabel lblPeserta;
     private DefaultTableModel model;
 
-    public peserta(){
-        String[] columnNames = {"Nama", "Usia", "Kota"};
-        Object[][] data = {
-                {"John", 25, "New York"},
-                {"Jane", 30, "London"},
-                {"Bob", 40, "Paris"}
-        };
-        DefaultTableModel model = new DefaultTableModel(data, columnNames);
-
-        // Buat JTable menggunakan model
-        table = new JTable(model);
-
-        // Buat JScrollPane dan tambahkan JTable ke dalamnya
-        JScrollPane scrollPane = new JScrollPane(table);
-
-        // Buat JPanel dan set layout
-        JButton kembali = new JButton();
-
-        JPanel panel = new JPanel();
-        panel.setLayout(new BorderLayout());
-        JLabel label = new JLabel("Data Pengguna");
 
 
+    public peserta(loginModel m){
+        setVisible(true);
+        listController ls =  new listController(m,this);
+        JLabel titleLabel = new JLabel("List Data Peserta");
+        titleLabel.setBorder(new EmptyBorder(20,0,20,0));
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 30));
+        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        add(titleLabel, BorderLayout.NORTH);
 
-        // Buat JLabel
 
-        panel.add(kembali,BorderLayout.NORTH);
-        // Tambahkan JLabel ke dalam JPanel di bagian atas (North)
-        panel.add(label, BorderLayout.NORTH);
-        panel.setBorder(new EmptyBorder(5,10,50,10));
-        // Tambahkan JScrollPane ke dalam JPanel di bagian tengah (Center)
-        scrollPane.setBorder(new EmptyBorder(20,0,0,0));
-        panel.add(scrollPane, BorderLayout.CENTER);
-        setSize(600, 500);
+        table = new JTable();
+
+        ResultSet resultSet = ls.list();
+        DefaultTableModel model = new DefaultTableModel();
+        try {
+            ResultSetMetaData metaData = resultSet.getMetaData();
+            System.out.println(metaData);
+            int columnCount = metaData.getColumnCount();
+            System.out.println(columnCount);
+            for (int column = 1; column <= columnCount; column++) {
+                model.addColumn(metaData.getColumnName(column));
+            }
+
+            // Add row data to the model
+            while (resultSet.next()) {
+                Object[] rowData = new Object[columnCount];
+                for (int column = 1; column <= columnCount; column++) {
+                    rowData[column - 1] = resultSet.getObject(column);
+                }
+                model.addRow(rowData);
+            }
+
+            // Set the table model
+            table.setModel(model);
+            table.setEnabled(false);
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
         // Set content pane dengan JPanel
-        setContentPane(panel);
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBorder(new EmptyBorder(0,20,0,20));
+        add(scrollPane, BorderLayout.CENTER);
 
-
-
-
-
-
-        setVisible(true);
-        setTitle("login");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-
-
+        setSize(600, 500);
         setLocationRelativeTo(null);
 
     }
+
+
 
 
 }

@@ -2,11 +2,42 @@ package view;
 
 import controller.editController;
 import model.loginModel;
-public class edit {
-    private editController controller;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class edit extends JFrame {
+
+
+    public JTextField nama;
+    public JTextField email;
+    public JTextField hp;
+    private JButton updateButton;
+    private JPanel Panel;
+    private JButton kembaliButton;
 
     public edit(loginModel model){
-         new editController(model,this);
+        editController controller =  new editController(model,this);
+         setVisible(true);
+        setContentPane(Panel);
+        setSize(300,450);
+        setResizable(false);
+        setLocationRelativeTo(null);
 
+        updateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.editProses();
+                dispose();
+            }
+        });
+        kembaliButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new dashboard(model);
+                dispose();
+            }
+        });
     }
 }

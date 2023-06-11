@@ -13,11 +13,6 @@ public class loginModel {
 
     private ResultSet resultSet;
 
-
-
-
-
-
         private String username;
         private String password;
         private String nama;
@@ -79,7 +74,6 @@ public class loginModel {
 
 
     }
-
 
 
     public boolean getUser() {
@@ -173,15 +167,48 @@ public class loginModel {
 
     }
 
-    public void editInput(){
+    public boolean editInput(){
         DbConnection connection = new DbConnection();
+        status = false;
         try{
             String query = "UPDATE user SET NamaLengkap = '"+getNama()+"', email='"+getEmail()+"', noHp='"+getNoHp()+"' WHERE id='"+getId()+"'";
             statement = connection.DbConnection().createStatement();
             connection.DbConnection().createStatement().executeUpdate(query);
+            status = true;
+        }catch (SQLException e){
+            e.printStackTrace();
+            status = false;
+        }
+
+        return status;
+    }
+
+    public ResultSet dataPeserta(){
+        DbConnection connection = new DbConnection();
+        List<String> p = new ArrayList<>();
+        try{
+            String query = "SELECT id,namaLengkap FROM user";
+            statement = connection.DbConnection().createStatement();
+            resultSet = statement.executeQuery(query);
+
+
+//            if(!resultSet.wasNull()){
+//                String id ,nama ;
+//                while(resultSet.next()){
+//                    id = resultSet.getString("id");
+//                    nama = resultSet.getString("namaLengkap");
+//
+//                    p.add(id);
+//                    p.add(nama);
+//                }
+//
+//
+//            }
         }catch (SQLException e){
             e.printStackTrace();
         }
+//        return p;
+        return resultSet;
     }
 
 
