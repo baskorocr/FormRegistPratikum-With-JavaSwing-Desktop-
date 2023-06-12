@@ -78,6 +78,8 @@ public class loginModel {
 
     public boolean getUser() {
         DbConnection connection = new DbConnection();
+        connection.DbConnection();
+        connection.cek();
         status = false;
 
 

@@ -1,5 +1,6 @@
 package controller;
 
+import model.DbConnection;
 import model.daftarModel;
 import view.daftar;
 import view.login;
@@ -20,15 +21,15 @@ public class daftarController {
 
     }
     public void proses(){
+        DbConnection connection = new DbConnection();
+        connection.DbConnection();
+        connection.cek();
         String username = view.username.getText();
         String password = view.password.getText();
         String nama = view.nama.getText();
         String email = view.email.getText();
         String nomer = view.telp.getText();
         String konfirmasi = view.konfirmasi.getText();
-
-
-
 
         if(username.isEmpty() || password.isEmpty() || nama.isEmpty() || email.isEmpty() || nomer.isEmpty() || konfirmasi.isEmpty() ){
 

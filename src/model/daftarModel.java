@@ -45,10 +45,12 @@ public class daftarModel {
 
     public Boolean proses()  {
 
+        DbConnection connection = new DbConnection();
+
         status = false;
         try{
             String query = ("INSERT INTO user (username,password,namaLengkap,email,noHp) VALUES ('"+getUsername()+"','"+getPassword()+"', '"+getNama()+"', '"+getEmail()+"', '"+getNomer()+"') ");
-            DbConnection connection = new DbConnection();
+
             connection.DbConnection().createStatement().executeUpdate(query);
             status = true;
         }catch (SQLException e){
