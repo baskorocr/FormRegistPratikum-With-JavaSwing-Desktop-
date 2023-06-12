@@ -24,6 +24,7 @@ public class edit extends JFrame {
         setSize(300,450);
         setResizable(false);
         setLocationRelativeTo(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         updateButton.addActionListener(new ActionListener() {
             @Override

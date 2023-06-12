@@ -26,6 +26,7 @@ public class login extends JFrame{
        setContentPane(Panel);
        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(250,300);
+        setResizable(false);
         setLocationRelativeTo(null);
     login.addActionListener(new ActionListener() {
         @Override

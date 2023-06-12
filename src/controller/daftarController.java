@@ -31,34 +31,38 @@ public class daftarController {
         String nomer = view.telp.getText();
         String konfirmasi = view.konfirmasi.getText();
 
-        if(username.isEmpty() || password.isEmpty() || nama.isEmpty() || email.isEmpty() || nomer.isEmpty() || konfirmasi.isEmpty() ){
+       if(connection.getStatus() == true){
+           if(username.isEmpty() || password.isEmpty() || nama.isEmpty() || email.isEmpty() || nomer.isEmpty() || konfirmasi.isEmpty() ){
 
-            JOptionPane.showMessageDialog(view, "Semuanya wajib diisi");
+               JOptionPane.showMessageDialog(view, "Semuanya wajib diisi");
 
-        }
-        else{
+           }
+           else{
 
-            if(!password.equals(konfirmasi)){
-                JOptionPane.showMessageDialog(view, "konfirmasi password tidak sama!");
-            }
-            else{
-                model.setUsername(username);
-                model.setPassword(password);
-                model.setNama(nama);
-                model.setNomer(nomer);
-                model.setEmail(email);
+               if(!password.equals(konfirmasi)){
+                   JOptionPane.showMessageDialog(view, "konfirmasi password tidak sama!");
+               }
+               else{
+                   model.setUsername(username);
+                   model.setPassword(password);
+                   model.setNama(nama);
+                   model.setNomer(nomer);
+                   model.setEmail(email);
 
-                result = model.proses();
-                if(result){
-                    JOptionPane.showMessageDialog(view, "Pendaftaran Berhasil");
-                    login lgn = new login();
-                    lgn.setVisible(true);
-                    view.dispose();
-                }
+                   result = model.proses();
+                   if(result){
+                       JOptionPane.showMessageDialog(view, "Pendaftaran Berhasil");
+                       login lgn = new login();
+                       lgn.setVisible(true);
+                       view.dispose();
+                   }
 
-            }
+               }
 
-        }
+           }
+
+       }
+
     }
 
 }
